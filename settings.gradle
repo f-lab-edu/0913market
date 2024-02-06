@@ -1,0 +1,4 @@
+rootProject.name = 'market0913'
+include 'market-common'
+include 'market-api'
+include 'market-domain'

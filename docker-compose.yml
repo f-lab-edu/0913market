@@ -1,0 +1,27 @@
+version: '3.9'
+
+services:
+  mysql:
+    container_name: market0913-mysql
+    image: mysql:8.0.29
+    ports:
+      - '3306:3306'
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --explicit_defaults_for_timestamp=1
+    environment:
+      - MYSQL_DATABASE=market0913
+      - MYSQL_USER=test
+      - MYSQL_PASSWORD=1234
+      - MYSQL_ROOT_PASSWORD=1234
+      - TZ=Asia/Seoul
+    volumes:
+      - ./mysql/init:/docker-entrypoint-initdb.d
+
+  redis:
+    container_name: market0913-redis
+    image: redis:7.2-alpine
+    command: redis-server --port 6380
+    labels:
+      - 'name=redis'
+      - 'mode=standalone'
+    ports:
+      - '6380:6380'
