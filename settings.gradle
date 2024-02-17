@@ -1,3 +1,4 @@
 rootProject.name = 'market0913'
 include 'market-api'
 include 'market-domain'
+include 'market-batch'

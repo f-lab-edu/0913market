@@ -5,8 +5,7 @@ jar {
 dependencies {
     implementation project(":market-domain")
 
-    implementation 'io.springfox:springfox-swagger2:2.10.5'
-    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0'
-
+    implementation 'org.springframework.boot:spring-boot-starter-batch'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.batch:spring-batch-test'
 }

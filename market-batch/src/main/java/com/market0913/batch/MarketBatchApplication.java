@@ -1,16 +1,19 @@
-package com.market0913.api;
+package com.market0913.batch;
 
 import com.market0913.domain.config.MarketDomainConfig;
+import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Import;
 
 @Import(MarketDomainConfig.class)
+@EnableBatchProcessing
 @SpringBootApplication
-public class MarketApiApplication {
+public class MarketBatchApplication {
 
     public static void main(String[] args) {
-        System.setProperty("spring.config.name", "application-api,application-domain");
-        SpringApplication.run(MarketApiApplication.class, args);
+        System.setProperty("spring.config.name", "application-batch,application-domain");
+        SpringApplication.run(MarketBatchApplication.class, args);
     }
+
 }

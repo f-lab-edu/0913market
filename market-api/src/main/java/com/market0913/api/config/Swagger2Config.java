@@ -1,40 +1,25 @@
 package com.market0913.api.config;
 
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.models.Components;
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Contact;
+import io.swagger.v3.oas.models.info.Info;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import springfox.documentation.builders.ApiInfoBuilder;
-import springfox.documentation.service.ApiInfo;
-import springfox.documentation.service.Contact;
-import springfox.documentation.spi.DocumentationType;
-import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
-
-import static java.util.Collections.singleton;
-import static springfox.documentation.builders.RequestHandlerSelectors.withMethodAnnotation;
 
 @Configuration
-@EnableSwagger2
-public class Swagger2Config implements WebMvcConfigurer {
+public class Swagger2Config {
 
     @Bean
-    public Docket restApi() {
-        return new Docket(DocumentationType.SWAGGER_2)
-                .apiInfo(apiInfo())
-                .produces(singleton("application/json"))
-                .consumes(singleton("application/json"))
-                .useDefaultResponseMessages(false)
-                .select()
-                .apis(withMethodAnnotation(ApiOperation.class))
-                .build();
-    }
-
-    private ApiInfo apiInfo() {
-        return new ApiInfoBuilder()
+    public OpenAPI openAPI() {
+        Info info = new Info()
                 .title("Market API")
-                .contact(new Contact("bomi", null, "bbomi0913@gmail.com"))
-                .version("1.0.0")
-                .build();
+                .description("공구일상 마켓 API 문서")
+                .contact(new Contact().email("bbomi0913@gmail.com"))
+                .version("1.0.0");
+
+        return new OpenAPI()
+                .components(new Components())
+                .info(info);
     }
 }
