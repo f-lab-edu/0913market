@@ -1,7 +1,8 @@
-package com.market0913.domain.config.product;
+package com.market0913.domain.config.model.product;
 
 import com.market0913.domain.config.util.BaseTimeEntity;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -25,4 +26,11 @@ public class Product extends BaseTimeEntity {
 
     private String description;
 
+    @Builder
+    public Product(String name, int price, String imageUrl, String description) {
+        this.name = name;
+        this.price = price;
+        this.imageUrl = imageUrl;
+        this.description = description;
+    }
 }
