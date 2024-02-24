@@ -1,4 +1,4 @@
-package com.market0913.domain.config.util;
+package com.market0913.domain.model;
 
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;

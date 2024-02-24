@@ -1,8 +1,10 @@
 package com.market0913.api.controller.product;
 
-import com.market0913.domain.config.model.product.Product;
+import com.market0913.domain.model.product.Product;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
 @Getter
 public class ProductRequest {
 

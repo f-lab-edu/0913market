@@ -1,12 +1,12 @@
 package com.market0913.api.controller.product;
 
-import com.market0913.domain.config.model.product.Product;
+import com.market0913.domain.model.product.Product;
 import lombok.Builder;
 import lombok.Getter;
 
 @Getter
 @Builder
-public class ProductDto {
+public class ProductResponse {
 
     private Long id;
 
@@ -18,8 +18,8 @@ public class ProductDto {
 
     private String description;
 
-    public static ProductDto from(final Product product) {
-        return ProductDto.builder()
+    public static ProductResponse from(final Product product) {
+        return ProductResponse.builder()
                 .id(product.getId())
                 .name(product.getName())
                 .price(product.getPrice())

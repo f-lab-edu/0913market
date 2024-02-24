@@ -1,6 +1,6 @@
-package com.market0913.domain.config.model.product;
+package com.market0913.domain.model.product;
 
-import com.market0913.domain.config.util.BaseTimeEntity;
+import com.market0913.domain.model.BaseTimeEntity;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
