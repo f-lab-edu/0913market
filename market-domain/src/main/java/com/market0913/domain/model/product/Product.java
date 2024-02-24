@@ -16,14 +16,16 @@ public class Product extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(name = "name", nullable = false, columnDefinition = "varchar(50) NOT NULL COMMENT '상품 이름'")
     private String name;
 
-    @Column(nullable = false)
+    @Column(name = "price", nullable = false, columnDefinition = "varchar(50) NOT NULL COMMENT '정가'")
     private int price;
 
+    @Column(name = "image_url", columnDefinition = "varchar(200) NULL COMMENT '상품의 대표 이미지'")
     private String imageUrl;
 
+    @Column(name = "description", columnDefinition = "text NULL COMMENT '상품 상세 설명'")
     private String description;
 
     @Builder
