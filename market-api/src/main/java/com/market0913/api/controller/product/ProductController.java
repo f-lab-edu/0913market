@@ -15,7 +15,7 @@ public class ProductController {
 
     @PostMapping
     public ProductResponse createProduct(@RequestBody ProductRequest request) {
-        return ProductResponse.from(productCreateService.createProduct(request.newProduct()));
+        return ProductResponse.from(productCreateService.createProduct(request.newProduct(), request.getCategory()));
     }
 
     @GetMapping("/{id}")
