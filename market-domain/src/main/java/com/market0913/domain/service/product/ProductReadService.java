@@ -6,7 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
+import java.util.NoSuchElementException;
 
 @RequiredArgsConstructor
 @Service
@@ -15,7 +15,8 @@ public class ProductReadService {
 
     private final ProductRepository productRepository;
 
-    public Optional<Product> findProduct(Long id) {
-        return productRepository.findById(id);
+    public Product findProduct(Long id) {
+        return productRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("상품 정보를 찾을 수 없습니다."));
     }
 }

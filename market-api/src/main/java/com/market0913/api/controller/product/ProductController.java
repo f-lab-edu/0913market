@@ -5,8 +5,6 @@ import com.market0913.domain.service.product.ProductReadService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.NoSuchElementException;
-
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/product")
@@ -22,8 +20,6 @@ public class ProductController {
 
     @GetMapping("/{id}")
     public ProductResponse getProduct(@PathVariable("id") Long id) {
-        return productReadService.findProduct(id)
-                .map(ProductResponse::from)
-                .orElseThrow(() -> new NoSuchElementException("상품 정보를 찾을 수 없습니다."));
+        return ProductResponse.from(productReadService.findProduct(id));
     }
 }

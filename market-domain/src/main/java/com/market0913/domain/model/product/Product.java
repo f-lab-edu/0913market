@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import static com.google.common.base.Preconditions.checkArgument;
+
 @NoArgsConstructor
 @Getter
 @Entity
@@ -30,6 +32,9 @@ public class Product extends BaseTimeEntity {
 
     @Builder
     public Product(String name, int price, String imageUrl, String description) {
+        checkArgument(name != null, "상품 이름은 필수 값 입니다.");
+        checkArgument(price >= 0, "상품 가격은 0 이상이어야 합니다.");
+
         this.name = name;
         this.price = price;
         this.imageUrl = imageUrl;
