@@ -1,6 +1,7 @@
 package com.market0913.domain.model.product;
 
 import com.market0913.domain.model.BaseTimeEntity;
+import com.market0913.domain.model.category.Category;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -18,6 +19,10 @@ public class Product extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id")
+    private Category category;
+
     @Column(name = "name", nullable = false, columnDefinition = "varchar(50) NOT NULL COMMENT '상품 이름'")
     private String name;
 
@@ -31,10 +36,11 @@ public class Product extends BaseTimeEntity {
     private String description;
 
     @Builder
-    public Product(String name, int price, String imageUrl, String description) {
+    public Product(Category category, String name, int price, String imageUrl, String description) {
         checkArgument(name != null, "상품 이름은 필수 값 입니다.");
         checkArgument(price >= 0, "상품 가격은 0 이상이어야 합니다.");
 
+        this.category = category;
         this.name = name;
         this.price = price;
         this.imageUrl = imageUrl;

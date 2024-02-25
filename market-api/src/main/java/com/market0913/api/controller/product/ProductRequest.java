@@ -1,5 +1,7 @@
 package com.market0913.api.controller.product;
 
+import com.market0913.domain.model.category.Category;
+import com.market0913.domain.model.category.CategoryType;
 import com.market0913.domain.model.product.Product;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,6 +13,8 @@ import static com.google.common.base.Preconditions.checkArgument;
 public class ProductRequest {
 
     private String name;
+
+    private CategoryType category;
 
     private int price;
 
@@ -24,6 +28,7 @@ public class ProductRequest {
 
         return Product.builder()
                 .name(name)
+                .category(new Category(category))
                 .price(price)
                 .imageUrl(imageUrl)
                 .description(description)

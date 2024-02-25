@@ -1,5 +1,6 @@
 package com.market0913.api.controller.product;
 
+import com.market0913.domain.model.category.CategoryType;
 import com.market0913.domain.model.product.Product;
 import lombok.Builder;
 import lombok.Getter;
@@ -9,6 +10,8 @@ import lombok.Getter;
 public class ProductResponse {
 
     private Long id;
+
+    private CategoryType category;
 
     private String name;
 
@@ -21,6 +24,7 @@ public class ProductResponse {
     public static ProductResponse from(final Product product) {
         return ProductResponse.builder()
                 .id(product.getId())
+                .category(product.getCategory().getName())
                 .name(product.getName())
                 .price(product.getPrice())
                 .imageUrl(product.getImageUrl())
