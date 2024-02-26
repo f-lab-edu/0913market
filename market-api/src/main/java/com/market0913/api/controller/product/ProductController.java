@@ -2,6 +2,7 @@ package com.market0913.api.controller.product;
 
 import com.market0913.domain.service.product.ProductCreateService;
 import com.market0913.domain.service.product.ProductReadService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,7 +15,7 @@ public class ProductController {
     private final ProductCreateService productCreateService;
 
     @PostMapping
-    public ProductResponse createProduct(@RequestBody ProductRequest request) {
+    public ProductResponse createProduct(@Valid @RequestBody ProductRequest request) {
         return ProductResponse.from(productCreateService.createProduct(request.newProduct()));
     }
 

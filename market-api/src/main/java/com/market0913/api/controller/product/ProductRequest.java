@@ -1,17 +1,19 @@
 package com.market0913.api.controller.product;
 
 import com.market0913.domain.model.product.Product;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import static com.google.common.base.Preconditions.checkArgument;
+import org.hibernate.validator.constraints.Range;
 
 @NoArgsConstructor
 @Getter
 public class ProductRequest {
 
+    @NotEmpty
     private String name;
 
+    @Range(min = 1)
     private int price;
 
     private String imageUrl;
@@ -19,9 +21,6 @@ public class ProductRequest {
     private String description;
 
     public Product newProduct() {
-        checkArgument(name != null, "상품 이름은 필수 값 입니다.");
-        checkArgument(price >= 0, "상품 가격은 0 이상이어야 합니다.");
-
         return Product.builder()
                 .name(name)
                 .price(price)
