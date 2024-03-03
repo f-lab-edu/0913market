@@ -12,12 +12,13 @@ public class Member {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "member_id", nullable = false)
-    private Long memberId;
+    @Column(name = "id", nullable = false)
+    private Long id;
 
-    @Column(name = "id", nullable = false, unique = true, columnDefinition = "varchar(30) COMMENT '회원 아이디'")
-    private String id;
+    @Column(name = "member_id", unique = true, nullable = false, columnDefinition = "varchar(30) COMMENT '회원 아이디'")
+    private String memberId;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "type", nullable = false, columnDefinition = "varchar(20) COMMENT '회원 타입'")
-    private MemberType memberType;
+    private MemberType type;
 }

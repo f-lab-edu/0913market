@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @Entity
 @Table(name = "product", indexes = {
-        @Index(name = "idx_id", columnList = "member_id"),
+        @Index(name = "idx_seller_id", columnList = "seller_id"),
         @Index(name = "idx_created_at", columnList = "created_at")
 })
 public class Product extends BaseTimeEntity {
@@ -21,8 +21,8 @@ public class Product extends BaseTimeEntity {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id", nullable = false, columnDefinition = "bigint COMMENT '회원 PK'")
-    private Member member;
+    @JoinColumn(name = "seller_id", nullable = false, columnDefinition = "bigint COMMENT '회원 PK'")
+    private Member seller;
 
     @Column(name = "name", nullable = false, columnDefinition = "varchar(50) COMMENT '상품 이름'")
     private String name;
@@ -37,15 +37,15 @@ public class Product extends BaseTimeEntity {
     private String description;
 
     @Builder
-    public Product(Member member, String name, int price, String imageUrl, String description) {
-        this.member = member;
+    public Product(Member seller, String name, int price, String imageUrl, String description) {
+        this.seller = seller;
         this.name = name;
         this.price = price;
         this.imageUrl = imageUrl;
         this.description = description;
     }
 
-    public void setMember(Member member) {
-        this.member = member;
+    public void setSeller(Member seller) {
+        this.seller = seller;
     }
 }
