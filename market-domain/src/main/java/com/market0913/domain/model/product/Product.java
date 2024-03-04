@@ -44,8 +44,4 @@ public class Product extends BaseTimeEntity {
         this.imageUrl = imageUrl;
         this.description = description;
     }
-
-    public void setSeller(Member seller) {
-        this.seller = seller;
-    }
 }
