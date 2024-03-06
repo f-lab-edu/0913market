@@ -10,6 +10,8 @@ public class ProductResponse {
 
     private Long id;
 
+    private String seller;
+
     private String name;
 
     private int price;
@@ -21,6 +23,7 @@ public class ProductResponse {
     public static ProductResponse from(final Product product) {
         return ProductResponse.builder()
                 .id(product.getId())
+                .seller(product.getSeller().getMemberId())
                 .name(product.getName())
                 .price(product.getPrice())
                 .imageUrl(product.getImageUrl())

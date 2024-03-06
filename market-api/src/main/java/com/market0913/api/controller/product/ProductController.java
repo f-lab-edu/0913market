@@ -15,8 +15,8 @@ public class ProductController {
     private final ProductCreateService productCreateService;
 
     @PostMapping
-    public ProductResponse createProduct(@Valid @RequestBody ProductRequest request) {
-        return ProductResponse.from(productCreateService.createProduct(request.newProduct()));
+    public ProductResponse createProduct(@RequestHeader("ID") String id, @Valid @RequestBody ProductRequest productRequest) {
+        return ProductResponse.from(productCreateService.createProduct(productRequest.toCreator(id)));
     }
 
     @GetMapping("/{id}")
