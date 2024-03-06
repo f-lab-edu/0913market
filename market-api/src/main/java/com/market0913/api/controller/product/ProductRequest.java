@@ -1,6 +1,6 @@
 package com.market0913.api.controller.product;
 
-import com.market0913.domain.model.product.Product;
+import com.market0913.domain.model.product.ProductCreator;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,8 +20,9 @@ public class ProductRequest {
 
     private String description;
 
-    public Product newProduct() {
-        return Product.builder()
+    public ProductCreator toCreator(final String sellerId) {
+        return ProductCreator.builder()
+                .sellerId(sellerId)
                 .name(name)
                 .price(price)
                 .imageUrl(imageUrl)
