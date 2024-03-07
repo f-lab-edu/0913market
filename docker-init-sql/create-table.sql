@@ -35,3 +35,25 @@ CREATE TABLE `product` (
 	KEY `idx_seller_id` (`seller_id`),
 	KEY `idx_created_at` (`created_at`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+DROP TABLE IF EXISTS `market`;
+CREATE TABLE `market` (
+    `id`                    bigint          NOT NULL                AUTO_INCREMENT,
+    `product_id`            bigint          NOT NULL                COMMENT '상품 PK',
+    `seller_id`             bigint          NOT NULL                COMMENT '회원 PK',
+    `discount_price`        int             NOT NULL                COMMENT '할인가',
+    `quantity`              int             NOT NULL                COMMENT '등록 수량',
+    `sales_quantity`        int             NOT NULL                COMMENT '현재까지 판매된 개수',
+    `min_sales_quantity`    int             NOT NULL                COMMENT '최소 판매 개수',
+    `limit_quantity`        int             NOT NULL                COMMENT '인당 최대 구매 가능 수',
+    `sales_start_date`      datetime(6)     NOT NULL                COMMENT '판매 시작 일자',
+    `sales_end_date`        datetime(6)     NOT NULL                COMMENT '판매 종료 일자',
+    `status`                varchar(20)     NOT NULL DEFAULT 'WAIT' COMMENT '마켓 상태',
+    `created_at`            datetime(6)     NOT NULL                COMMENT '마켓 생성 일자',
+    `updated_at`            datetime(6)     NOT NULL                COMMENT '마켓 변경 일자',
+    PRIMARY KEY(`id`),
+    CONSTRAINT `fk_market_to_product` FOREIGN KEY (`product_id`) REFERENCES product (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT `fk_market_to_member` FOREIGN KEY (`seller_id`) REFERENCES member (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
+    KEY `idx_seller_id` (`seller_id`),
+    KEY `idx_status` (`status`)
+);
