@@ -40,7 +40,6 @@ DROP TABLE IF EXISTS `market`;
 CREATE TABLE `market` (
     `id`                    bigint          NOT NULL                AUTO_INCREMENT,
     `product_id`            bigint          NOT NULL                COMMENT '상품 PK',
-    `seller_id`             bigint          NOT NULL                COMMENT '회원 PK',
     `discount_price`        int             NOT NULL                COMMENT '할인가',
     `quantity`              int             NOT NULL                COMMENT '등록 수량',
     `sales_quantity`        int             NOT NULL                COMMENT '현재까지 판매된 개수',
@@ -53,7 +52,5 @@ CREATE TABLE `market` (
     `updated_at`            datetime(6)     NOT NULL                COMMENT '마켓 변경 일자',
     PRIMARY KEY(`id`),
     CONSTRAINT `fk_market_to_product` FOREIGN KEY (`product_id`) REFERENCES product (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
-    CONSTRAINT `fk_market_to_member` FOREIGN KEY (`seller_id`) REFERENCES member (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
-    KEY `idx_seller_id` (`seller_id`),
     KEY `idx_status` (`status`)
 );
