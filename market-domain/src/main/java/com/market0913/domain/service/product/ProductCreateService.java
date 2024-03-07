@@ -4,7 +4,10 @@ import com.market0913.domain.model.member.Member;
 import com.market0913.domain.model.member.MemberType;
 import com.market0913.domain.model.product.Product;
 import com.market0913.domain.model.product.ProductCreator;
+import com.market0913.domain.model.product.ProductDto;
 import com.market0913.domain.repository.MemberRepository;
+import com.market0913.domain.model.category.Category;
+import com.market0913.domain.repository.CategoryRepository;
 import com.market0913.domain.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -19,13 +22,16 @@ public class ProductCreateService {
 
     private final ProductRepository productRepository;
 
+    private final CategoryRepository categoryRepository;
     private final MemberRepository memberRepository;
 
-    public Product createProduct(ProductCreator productCreator) {
+    public ProductDto createProduct(ProductCreator productCreator) {
         Member seller = memberRepository.findByMemberIdAndType(productCreator.getSellerId(), MemberType.SELLER)
                 .orElseThrow(() -> new NoSuchElementException("판매자 정보를 찾을 수 없습니다."));
 
-        Product product = ProductCreator.createProduct(seller, productCreator);
-        return productRepository.save(product);
+        Category category = categoryRepository.findByName(productCreator.getCategory());
+        Product product = ProductCreator.createProduct(seller, category, productCreator);
+
+        return ProductDto.from(productRepository.save(product));
     }
 }
