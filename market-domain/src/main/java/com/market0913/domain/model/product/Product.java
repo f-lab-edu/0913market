@@ -26,7 +26,7 @@ public class Product extends BaseTimeEntity {
     @JoinColumn(name = "seller_id", nullable = false, columnDefinition = "bigint COMMENT '회원 PK'")
     private Member seller;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id", nullable = false, columnDefinition = "bigint COMMENT '카테고리 PK'")
     private Category category;
 

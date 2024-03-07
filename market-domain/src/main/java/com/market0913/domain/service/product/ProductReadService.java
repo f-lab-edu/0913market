@@ -1,6 +1,6 @@
 package com.market0913.domain.service.product;
 
-import com.market0913.domain.model.product.Product;
+import com.market0913.domain.model.product.ProductDto;
 import com.market0913.domain.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,8 +15,9 @@ public class ProductReadService {
 
     private final ProductRepository productRepository;
 
-    public Product findProduct(Long id) {
-        return productRepository.findById(id)
-                .orElseThrow(() -> new NoSuchElementException("상품 정보를 찾을 수 없습니다."));
+    public ProductDto findProduct(Long id) {
+        return ProductDto.from(productRepository.findByIdWithSellerAndCategory(id)
+                .orElseThrow(() -> new NoSuchElementException("상품 정보를 찾을 수 없습니다."))
+        );
     }
 }

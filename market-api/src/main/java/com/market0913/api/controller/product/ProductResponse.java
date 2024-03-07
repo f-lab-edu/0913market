@@ -1,7 +1,7 @@
 package com.market0913.api.controller.product;
 
 import com.market0913.domain.model.category.CategoryType;
-import com.market0913.domain.model.product.Product;
+import com.market0913.domain.model.product.ProductDto;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -23,7 +23,7 @@ public class ProductResponse {
 
     private String description;
 
-    public static ProductResponse from(final Product product) {
+    public static ProductResponse from(final ProductDto product) {
         return ProductResponse.builder()
                 .id(product.getId())
                 .seller(product.getSeller().getMemberId())
