@@ -23,7 +23,7 @@ public class MarketCreateService {
     public MarketDto createMarket(MarketCreator marketCreator) {
         ProductCreator productCreator = new ProductCreator(marketCreator);
         ProductDto productDto = productCreateService.createProduct(productCreator);
-        Market market = MarketCreator.createMarket(marketCreator, productDto.getId());
-        return MarketDto.from(marketRepository.save(market), productDto);
+        Market market = MarketCreator.createMarket(marketCreator, productDto);
+        return MarketDto.from(marketRepository.save(market));
     }
 }

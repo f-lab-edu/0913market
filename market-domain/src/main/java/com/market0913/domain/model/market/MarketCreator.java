@@ -1,6 +1,8 @@
 package com.market0913.domain.model.market;
 
 import com.market0913.domain.model.category.CategoryType;
+import com.market0913.domain.model.product.Product;
+import com.market0913.domain.model.product.ProductDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -42,9 +44,18 @@ public class MarketCreator {
 
     private MarketStatus marketStatus;
 
-    public static Market createMarket(MarketCreator creator, Long productId) {
+    public static Market createMarket(MarketCreator creator, ProductDto productDto) {
         return Market.builder()
-                .productId(productId)
+                .product(
+                    Product.builder()
+                        .seller(productDto.getSeller())
+                        .category(productDto.getCategory())
+                        .name(productDto.getName())
+                        .price(productDto.getPrice())
+                        .imageUrl(productDto.getImageUrl())
+                        .description(productDto.getDescription())
+                    .build()
+                )
                 .discountPrice(creator.getDiscountPrice())
                 .quantity(creator.getQuantity())
                 .salesQuantity(creator.getSalesQuantity())
@@ -52,7 +63,7 @@ public class MarketCreator {
                 .limitQuantity(creator.getLimitQuantity())
                 .salesStartDate(creator.getSalesStartDate())
                 .salesEndDate(creator.getSalesEndDate())
-                .marketStatus(creator.getMarketStatus())
+                .marketStatus(MarketStatus.WAIT)
                 .build();
     }
 }

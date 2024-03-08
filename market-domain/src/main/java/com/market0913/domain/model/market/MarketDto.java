@@ -2,7 +2,7 @@ package com.market0913.domain.model.market;
 
 import com.market0913.domain.model.category.Category;
 import com.market0913.domain.model.member.Member;
-import com.market0913.domain.model.product.ProductDto;
+import com.market0913.domain.model.product.Product;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -50,7 +50,8 @@ public class MarketDto {
 
     private LocalDateTime updatedAt;
 
-    public static MarketDto from(Market market, ProductDto product) {
+    public static MarketDto from(Market market) {
+        Product product = market.getProduct();
         return MarketDto.builder()
                 .id(market.getId())
                 .seller(product.getSeller())

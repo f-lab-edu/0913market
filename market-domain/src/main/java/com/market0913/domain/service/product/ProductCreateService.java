@@ -20,8 +20,6 @@ import java.util.NoSuchElementException;
 @Transactional
 public class ProductCreateService {
 
-    private final ProductRepository productRepository;
-
     private final CategoryRepository categoryRepository;
     private final MemberRepository memberRepository;
 
@@ -32,6 +30,6 @@ public class ProductCreateService {
         Category category = categoryRepository.findByName(productCreator.getCategory());
         Product product = ProductCreator.createProduct(seller, category, productCreator);
 
-        return ProductDto.from(productRepository.save(product));
+        return ProductDto.from(product);
     }
 }

@@ -1,6 +1,7 @@
 package com.market0913.domain.model.market;
 
 import com.market0913.domain.model.BaseTimeEntity;
+import com.market0913.domain.model.product.Product;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -20,8 +21,9 @@ public class Market extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "product_id", nullable = false, columnDefinition = "bigint COMMENT '상품 PK'")
-    private Long productId;
+    private Product product;
 
     @Column(name = "discount_price", nullable = false, columnDefinition = "int COMMENT '할인가'")
     private int discountPrice;
@@ -49,8 +51,8 @@ public class Market extends BaseTimeEntity {
     private MarketStatus marketStatus;
 
     @Builder
-    public Market(Long productId, int discountPrice, int quantity, int salesQuantity, int minSalesQuantity, int limitQuantity, LocalDateTime salesStartDate, LocalDateTime salesEndDate, MarketStatus marketStatus) {
-        this.productId = productId;
+    public Market(Product product, int discountPrice, int quantity, int salesQuantity, int minSalesQuantity, int limitQuantity, LocalDateTime salesStartDate, LocalDateTime salesEndDate, MarketStatus marketStatus) {
+        this.product = product;
         this.discountPrice = discountPrice;
         this.quantity = quantity;
         this.salesQuantity = salesQuantity;
@@ -59,10 +61,5 @@ public class Market extends BaseTimeEntity {
         this.salesStartDate = salesStartDate;
         this.salesEndDate = salesEndDate;
         this.marketStatus = marketStatus;
-    }
-
-    @PrePersist
-    public void prePersist() {
-        this.marketStatus = MarketStatus.WAIT;
     }
 }
