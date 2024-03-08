@@ -6,6 +6,9 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/market")
@@ -19,8 +22,15 @@ public class MarketController {
         return MarketResponse.from(marketCreateService.createMarket(marketRequest.toCreator(userId)));
     }
 
-    @GetMapping("/{productId}")
-    public MarketResponse getMarket(@PathVariable("productId") Long id) {
-        return MarketResponse.from(marketReadService.findMarket(id));
+    @GetMapping("/{marketId}")
+    public MarketResponse getMarket(@PathVariable("marketId") Long marketId) {
+        return MarketResponse.from(marketReadService.findMarket(marketId));
+    }
+
+    @GetMapping("/seller/{sellerId}")
+    public List<MarketResponse> getMarket(@PathVariable("sellerId") String sellerId) {
+        return marketReadService.findMarket(sellerId).stream()
+                .map(MarketResponse::from)
+                .collect(Collectors.toList());
     }
 }
