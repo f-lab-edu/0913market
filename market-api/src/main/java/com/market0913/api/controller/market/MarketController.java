@@ -13,7 +13,7 @@ public class MarketController {
     private final MarketCreateService marketCreateService;
 
     @PostMapping
-    public MarketResponse createMarket(@RequestHeader("ID") String id, @Valid @RequestBody MarketRequest marketRequest) {
-        return MarketResponse.from(marketCreateService.createMarket(marketRequest.toCreator(id)));
+    public MarketResponse createMarket(@RequestHeader("USER_ID") String userId, @Valid @RequestBody MarketRequest marketRequest) {
+        return MarketResponse.from(marketCreateService.createMarket(marketRequest.toCreator(userId)));
     }
 }
