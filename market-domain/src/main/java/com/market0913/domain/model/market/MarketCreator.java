@@ -48,6 +48,7 @@ public class MarketCreator {
         return Market.builder()
                 .product(
                     Product.builder()
+                        .id(productDto.getId())
                         .seller(productDto.getSeller())
                         .category(productDto.getCategory())
                         .name(productDto.getName())

@@ -22,6 +22,7 @@ public class ProductCreateService {
 
     private final CategoryRepository categoryRepository;
     private final MemberRepository memberRepository;
+    private final ProductRepository productRepository;
 
     public ProductDto createProduct(ProductCreator productCreator) {
         Member seller = memberRepository.findByMemberIdAndType(productCreator.getSellerId(), MemberType.SELLER)
@@ -30,6 +31,6 @@ public class ProductCreateService {
         Category category = categoryRepository.findByName(productCreator.getCategory());
         Product product = ProductCreator.createProduct(seller, category, productCreator);
 
-        return ProductDto.from(product);
+        return ProductDto.from(productRepository.save(product));
     }
 }
