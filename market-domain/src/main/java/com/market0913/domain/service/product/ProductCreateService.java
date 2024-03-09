@@ -20,10 +20,9 @@ import java.util.NoSuchElementException;
 @Transactional
 public class ProductCreateService {
 
-    private final ProductRepository productRepository;
-
     private final CategoryRepository categoryRepository;
     private final MemberRepository memberRepository;
+    private final ProductRepository productRepository;
 
     public ProductDto createProduct(ProductCreator productCreator) {
         Member seller = memberRepository.findByMemberIdAndType(productCreator.getSellerId(), MemberType.SELLER)
