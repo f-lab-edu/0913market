@@ -1,6 +1,7 @@
 package com.market0913.domain.model.order;
 
 import com.market0913.domain.model.BaseTimeEntity;
+import com.market0913.domain.model.market.Market;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -23,8 +24,9 @@ public class Order extends BaseTimeEntity {
     @Column(name = "member_id", nullable = false, columnDefinition = "bigint COMMENT '회원 PK'")
     private Long memberId;
 
-    @Column(name = "market_id", nullable = false, columnDefinition = "bigint COMMENT '마켓 PK'")
-    private Long marketId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "market_id", nullable = false, columnDefinition = "bigint COMMENT '마켓 PK'")
+    private Market market;
 
     @Column(name = "order_quantity", nullable = false, columnDefinition = "int COMMENT '주문 수량'")
     private int orderQuantity;
@@ -39,10 +41,10 @@ public class Order extends BaseTimeEntity {
     private LocalDateTime canceledAt;
 
     @Builder
-    public Order(Long id, Long memberId, Long marketId, int orderQuantity, int orderAmount, OrderStatus orderStatus, LocalDateTime canceledAt) {
+    public Order(Long id, Long memberId, Market market, int orderQuantity, int orderAmount, OrderStatus orderStatus, LocalDateTime canceledAt) {
         this.id = id;
         this.memberId = memberId;
-        this.marketId = marketId;
+        this.market = market;
         this.orderQuantity = orderQuantity;
         this.orderAmount = orderAmount;
         this.orderStatus = orderStatus;
