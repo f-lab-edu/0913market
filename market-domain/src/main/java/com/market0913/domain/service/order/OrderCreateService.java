@@ -6,6 +6,7 @@ import com.market0913.domain.model.member.MemberType;
 import com.market0913.domain.model.order.Order;
 import com.market0913.domain.model.order.OrderCreator;
 import com.market0913.domain.model.order.OrderDto;
+import com.market0913.domain.model.order.OrderValidator;
 import com.market0913.domain.repository.MarketRepository;
 import com.market0913.domain.repository.MemberRepository;
 import com.market0913.domain.repository.OrderRepository;
@@ -24,6 +25,8 @@ public class OrderCreateService {
     private final MemberRepository memberRepository;
     private final MarketRepository marketRepository;
 
+    private final OrderValidator orderValidator;
+
     public OrderDto createOrder(OrderCreator orderCreator) {
         Member member = memberRepository.findByMemberIdAndType(orderCreator.getMemberId(), MemberType.BUYER)
                 .orElseThrow(() -> new NoSuchElementException("구매자 정보를 찾을 수 없습니다."));
@@ -31,26 +34,14 @@ public class OrderCreateService {
         Market market = marketRepository.findById(orderCreator.getMarketId())
                 .orElseThrow(() -> new NoSuchElementException("마켓 정보를 찾을 수 없습니다."));
 
-        // 주문 금액 검증
-        int orderAmount = market.getDiscountPrice() * orderCreator.getOrderQuantity();
-        if(orderAmount != orderCreator.getOrderAmount()) {
-            throw new IllegalArgumentException("구매 금액이 일치하지 않습니다.");
-        }
+        Order order = OrderCreator.createOrder(member, market, orderCreator);
+        order.placeOrder(orderValidator);
 
-        // 마켓 상태 검증
-
-        // 재고 수량 검증
-
-        // 인당 최대 구매 가능 수량 검증
-
-        // 판매 기간 검증
-
-        // 마켓 판매 수량 업데이트
         // TODO : 재고 수량 동시성 제어
+        // 마켓 판매 수량 업데이트
 
         // 품절 시 마켓 상태 업데이트
 
-        Order order = OrderCreator.createOrder(member, market, orderCreator);
         return OrderDto.from(orderRepository.save(order));
     }
 }

@@ -7,6 +7,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -23,13 +25,15 @@ public class OrderCreator {
 
     private OrderStatus orderStatus;
 
+    private LocalDateTime createdAt;
+
     public static Order createOrder(Member member, Market market, OrderCreator creator) {
         return Order.builder()
                 .memberId(member.getId())
                 .market(market)
                 .orderQuantity(creator.getOrderQuantity())
                 .orderAmount(creator.getOrderAmount())
-                .orderStatus(OrderStatus.PU_WAIT)
+                .createdAt(LocalDateTime.now())
                 .build();
     }
 }

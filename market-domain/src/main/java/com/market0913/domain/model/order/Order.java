@@ -40,14 +40,22 @@ public class Order extends BaseTimeEntity {
     @Column(name = "canceled_at", columnDefinition = "varchar(20) default 'PU_WAIT' COMMENT '주문 상태'")
     private LocalDateTime canceledAt;
 
+    private LocalDateTime createdAt;
+
     @Builder
-    public Order(Long id, Long memberId, Market market, int orderQuantity, int orderAmount, OrderStatus orderStatus, LocalDateTime canceledAt) {
+    public Order(Long id, Long memberId, Market market, int orderQuantity, int orderAmount, OrderStatus orderStatus, LocalDateTime createdAt, LocalDateTime canceledAt) {
         this.id = id;
         this.memberId = memberId;
         this.market = market;
         this.orderQuantity = orderQuantity;
         this.orderAmount = orderAmount;
         this.orderStatus = orderStatus;
+        this.createdAt = createdAt;
         this.canceledAt = canceledAt;
+    }
+
+    public void placeOrder(OrderValidator orderValidator) {
+        orderValidator.validate(this);
+        orderStatus = OrderStatus.PU_WAIT;
     }
 }
