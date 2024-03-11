@@ -38,9 +38,7 @@ public class OrderCreateService {
         order.placeOrder(orderValidator);
 
         // TODO : 재고 수량 동시성 제어
-        // 마켓 판매 수량 업데이트
-
-        // 품절 시 마켓 상태 업데이트
+        market.addSalesQuantity(order.getOrderQuantity());
 
         return OrderDto.from(orderRepository.save(order));
     }

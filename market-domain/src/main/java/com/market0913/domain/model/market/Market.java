@@ -62,4 +62,34 @@ public class Market extends BaseTimeEntity {
         this.salesEndDate = salesEndDate;
         this.marketStatus = marketStatus;
     }
+
+    // 마켓 판매 수량 증가
+    public Market addSalesQuantity(final int orderQuantity) {
+        this.salesQuantity += orderQuantity;
+        if(this.quantity == this.salesQuantity) {
+            soldOut();
+        }
+        return this;
+    }
+
+    // 마켓 품절 상태로 변경
+    public Market soldOut() {
+        if(this.quantity != this.salesQuantity) {
+            throw new IllegalArgumentException("판매 가능 수량이 남아있습니다.");
+        }
+        this.marketStatus = MarketStatus.SOLD_OUT;
+        return this;
+    }
+
+    // 마켓 구매 확정 상태로 변경
+    private Market available() {
+        this.marketStatus = MarketStatus.AVAILABLE;
+        return this;
+    }
+
+    // 마켓 구매 불가 상태로 변경
+    public Market notAvailable() {
+        this.marketStatus = MarketStatus.NOT_AVAILABLE;
+        return this;
+    }
 }
