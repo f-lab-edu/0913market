@@ -34,6 +34,7 @@ public class Order extends BaseTimeEntity {
     @Column(name = "order_amount", nullable = false, columnDefinition = "int COMMENT '주문 금액'")
     private int orderAmount;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false, columnDefinition = "varchar(20) default 'PU_WAIT' COMMENT '주문 상태'")
     private OrderStatus orderStatus;
 
