@@ -31,7 +31,7 @@ public class OrderCreateService {
         Member member = memberRepository.findByMemberIdAndType(orderCreator.getMemberId(), MemberType.BUYER)
                 .orElseThrow(() -> new NoSuchElementException("구매자 정보를 찾을 수 없습니다."));
 
-        Market market = marketRepository.findById(orderCreator.getMarketId())
+        Market market = marketRepository.findByIdWithLock(orderCreator.getMarketId())
                 .orElseThrow(() -> new NoSuchElementException("마켓 정보를 찾을 수 없습니다."));
 
         Order order = OrderCreator.createOrder(member, market, orderCreator);
