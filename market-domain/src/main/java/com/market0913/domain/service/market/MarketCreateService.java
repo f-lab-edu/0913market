@@ -8,7 +8,6 @@ import com.market0913.domain.model.member.Member;
 import com.market0913.domain.model.member.MemberType;
 import com.market0913.domain.model.product.Product;
 import com.market0913.domain.model.product.ProductCreator;
-import com.market0913.domain.model.product.ProductDto;
 import com.market0913.domain.repository.CategoryRepository;
 import com.market0913.domain.repository.MarketRepository;
 import com.market0913.domain.repository.MemberRepository;
@@ -32,18 +31,18 @@ public class MarketCreateService {
 
     public MarketDto createMarket(MarketCreator marketCreator) {
         ProductCreator productCreator = new ProductCreator(marketCreator);
-        ProductDto productDto = createProduct(productCreator);
-        Market market = MarketCreator.createMarket(marketCreator, productDto);
+        Product product = createProduct(productCreator);
+        Market market = MarketCreator.createMarket(marketCreator, product);
         return MarketDto.from(marketRepository.save(market));
     }
 
-    private ProductDto createProduct(ProductCreator productCreator) {
+    private Product createProduct(ProductCreator productCreator) {
         Member seller = memberRepository.findByMemberIdAndType(productCreator.getSellerId(), MemberType.SELLER)
                 .orElseThrow(() -> new NoSuchElementException("판매자 정보를 찾을 수 없습니다."));
 
         Category category = categoryRepository.findByName(productCreator.getCategory());
         Product product = ProductCreator.createProduct(seller, category, productCreator);
 
-        return ProductDto.from(productRepository.save(product));
+        return productRepository.save(product);
     }
 }
