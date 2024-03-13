@@ -54,3 +54,20 @@ CREATE TABLE `market` (
     CONSTRAINT `fk_market_to_product` FOREIGN KEY (`product_id`) REFERENCES product (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
     KEY `idx_status` (`status`)
 );
+
+DROP TABLE IF EXISTS `order`;
+CREATE TABLE `order` (
+    `id`                    bigint          NOT NULL                AUTO_INCREMENT,
+    `member_id`             bigint          NOT NULL                COMMENT '회원 PK',
+    `market_id`             bigint          NOT NULL                COMMENT '마켓 PK',
+    `order_quantity`        int             NOT NULL DEFAULT 1      COMMENT '주문 수량',
+    `order_amount`          int             NOT NULL                COMMENT '주문 금액',
+    `status`                varchar(20)     NOT NULL                COMMENT '주문 상태',
+    `created_at`            datetime(6)     NOT NULL                COMMENT '주문 생성 일자',
+    `updated_at`            datetime(6)     NULL                    COMMENT '주문 변경 일자',
+    `canceled_at`           datetime(6)     NULL                    COMMENT '주문 취소 일자',
+    PRIMARY KEY(`id`),
+    CONSTRAINT `fk_order_to_member` FOREIGN KEY (`member_id`) REFERENCES member (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT `fk_order_to_market` FOREIGN KEY (`market_id`) REFERENCES market (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
+    KEY `idx_member_id` (`member_id`)
+);
