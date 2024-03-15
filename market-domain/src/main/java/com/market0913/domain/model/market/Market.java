@@ -43,7 +43,7 @@ public class Market extends BaseTimeEntity {
     @Column(name = "sales_start_date", nullable = false, columnDefinition = "datetime(6) COMMENT '판매 시작 일자'")
     private LocalDateTime salesStartDate;
 
-    @Column(name = "sales_end_date", nullable = false, columnDefinition = "datetime(6) COMMENT '판매 종료 일자")
+    @Column(name = "sales_end_date", nullable = false, columnDefinition = "datetime(6) COMMENT '판매 종료 일자'")
     private LocalDateTime salesEndDate;
 
     @Enumerated(EnumType.STRING)
