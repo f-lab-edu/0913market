@@ -37,7 +37,6 @@ public class OrderCreateService {
         Order order = OrderCreator.createOrder(member, market, orderCreator);
         order.placeOrder(orderValidator);
 
-        // TODO : 재고 수량 동시성 제어
         market.addSalesQuantity(order.getOrderQuantity());
 
         return OrderDto.from(orderRepository.save(order));
