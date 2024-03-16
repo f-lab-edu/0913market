@@ -1,6 +1,21 @@
 server:
-  port: 8082
+  port: 8083
 
 spring:
   application:
     name: market-batch
+  batch:
+    job:
+      enabled: true
+  datasource:
+    url: jdbc:mysql://localhost:3306/market0913?useUnicode=yes&characterEncoding=UTF-8&rewriteBatchedStatements=true
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: test
+    password: 1234
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        ddl-auto: none
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQL8Dialect
