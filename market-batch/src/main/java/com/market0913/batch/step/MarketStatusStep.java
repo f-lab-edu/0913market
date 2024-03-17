@@ -22,6 +22,7 @@ public class MarketStatusStep {
 
     @Bean("marketStatus")
     public Step marketStatusStep(JobRepository jobRepository) {
+        System.out.println("Step");
         return new StepBuilder("marketStatusStep", jobRepository)
                 .<Market, Market>chunk(chunkSize, new JpaTransactionManager())
                 .reader(reader())
