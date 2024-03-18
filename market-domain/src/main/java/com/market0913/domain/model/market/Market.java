@@ -81,6 +81,15 @@ public class Market extends BaseTimeEntity {
         return this;
     }
 
+    // 판매 종료 시 마켓 상태 변경
+    public Market updateMarketStatus() {
+        if(this.salesQuantity >= this.minSalesQuantity){
+            return available();
+        }else {
+            return notAvailable();
+        }
+    }
+
     // 마켓 구매 확정 상태로 변경
     private Market available() {
         this.marketStatus = MarketStatus.AVAILABLE;
