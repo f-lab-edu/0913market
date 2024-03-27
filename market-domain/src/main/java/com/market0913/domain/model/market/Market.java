@@ -13,7 +13,8 @@ import java.time.LocalDateTime;
 @Getter
 @Entity
 @Table(name = "market", indexes = {
-        @Index(name = "idx_status", columnList = "status")
+        @Index(name = "idx_status", columnList = "status"),
+        @Index(name = "idx_sales_end_date_status_id", columnList = "sales_end_date, status, id")
 })
 public class Market extends BaseTimeEntity {
 
