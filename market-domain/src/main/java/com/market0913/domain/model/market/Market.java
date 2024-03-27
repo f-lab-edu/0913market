@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @Table(name = "market", indexes = {
         @Index(name = "idx_status", columnList = "status")
 })
-public class Market extends BaseTimeEntity {
+public class Market extends BaseTimeEntity { 
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
