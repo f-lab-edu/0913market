@@ -10,7 +10,6 @@ import org.springframework.context.annotation.Import;
 public class MarketApiApplication {
 
     public static void main(String[] args) {
-        System.setProperty("spring.config.name", "application-api,application-domain");
         SpringApplication.run(MarketApiApplication.class, args);
     }
 }

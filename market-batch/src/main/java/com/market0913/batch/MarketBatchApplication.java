@@ -12,7 +12,6 @@ import org.springframework.context.annotation.Import;
 public class MarketBatchApplication {
 
     public static void main(String[] args) {
-        System.setProperty("spring.config.name", "application-batch,application-domain");
         SpringApplication.run(MarketBatchApplication.class, args);
     }
 
