@@ -16,7 +16,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -44,5 +46,12 @@ public class MarketCreateService {
         Product product = ProductCreator.createProduct(seller, category, productCreator);
 
         return productRepository.save(product);
+    }
+
+    public void updateMarketStatus(List<Market> markets) {
+        List<Market> updateMarkets = markets.stream()
+                .map(Market::updateMarketStatus)
+                .collect(Collectors.toList());
+        marketRepository.saveAll(updateMarkets);
     }
 }

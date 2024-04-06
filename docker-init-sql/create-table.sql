@@ -49,7 +49,7 @@ CREATE TABLE `market` (
     `sales_end_date`        datetime(6)     NOT NULL                COMMENT '판매 종료 일자',
     `status`                varchar(20)     NOT NULL DEFAULT 'WAIT' COMMENT '마켓 상태',
     `created_at`            datetime(6)     NOT NULL                COMMENT '마켓 생성 일자',
-    `updated_at`            datetime(6)     NOT NULL                COMMENT '마켓 변경 일자',
+    `updated_at`            datetime(6)     NULL                    COMMENT '마켓 변경 일자',
     PRIMARY KEY(`id`),
     CONSTRAINT `fk_market_to_product` FOREIGN KEY (`product_id`) REFERENCES product (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
     KEY `idx_status` (`status`)
