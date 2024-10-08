@@ -13,7 +13,8 @@ import java.time.LocalDateTime;
 @Getter
 @Entity
 @Table(name = "market", indexes = {
-        @Index(name = "idx_status", columnList = "status")
+        @Index(name = "idx_status", columnList = "status"),
+        @Index(name = "idx_sales_end_date_status_id", columnList = "sales_end_date, status, id")
 })
 public class Market extends BaseTimeEntity {
 
@@ -79,6 +80,15 @@ public class Market extends BaseTimeEntity {
         }
         this.marketStatus = MarketStatus.SOLD_OUT;
         return this;
+    }
+
+    // 판매 종료 시 마켓 상태 변경
+    public Market updateMarketStatus() {
+        if(this.salesQuantity >= this.minSalesQuantity){
+            return available();
+        }else {
+            return notAvailable();
+        }
     }
 
     // 마켓 구매 확정 상태로 변경
