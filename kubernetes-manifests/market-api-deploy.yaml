@@ -15,9 +15,16 @@ spec:
       labels:
         app: market-api
     spec:
+      volumes:
+        - name: java-dump
+          persistentVolumeClaim:
+            claimName: java-dump-pvc
       containers:
         - name: market-api-container
           image: 713881790372.dkr.ecr.ap-northeast-2.amazonaws.com/market-api:0.0.1
+          volumeMounts:
+            - name: java-dump
+              mountPath: /java_dumps
           env:
             - name: SPRING_PROFILES_ACTIVE
               value: prod
