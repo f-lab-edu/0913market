@@ -33,6 +33,8 @@ spec:
                 name: mysql-config
             - secretRef:
                 name: mysql-secret
+            - configMapRef:
+                name: redis-config
           resources:
             requests:
               memory: "1024Mi"
