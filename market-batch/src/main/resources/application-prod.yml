@@ -8,3 +8,8 @@ spring:
     password: ${MYSQL_PASSWORD}
   jpa:
     open-in-view: false
+  data:
+    redis:
+      host: ${REDIS_HOST}
+      port: ${REDIS_PORT}
+      timeout: ${REDIS_TIMEOUT}

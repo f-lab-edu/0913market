@@ -52,8 +52,8 @@ public class MarketResponse {
     public static MarketResponse from(final MarketDto market) {
         return MarketResponse.builder()
                 .id(market.getId())
-                .seller(market.getSeller().getMemberId())
-                .category(market.getCategory().getName())
+                .seller(market.getSeller())
+                .category(market.getCategory())
                 .name(market.getName())
                 .price(market.getPrice())
                 .imageUrl(market.getImageUrl())
